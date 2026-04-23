@@ -2,7 +2,7 @@ package com.rbc.petstore.dto;
 
 import com.rbc.petstore.model.InventoryStatus;
 
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotBlank;
 
 
 /**
@@ -12,7 +12,7 @@ public class PetDTO {
 
     private Long id;
 
-    @NotEmpty
+    @NotBlank
     private String name;
 
     private InventoryStatus status;

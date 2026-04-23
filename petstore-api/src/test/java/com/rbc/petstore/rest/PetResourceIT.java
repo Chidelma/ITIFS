@@ -80,6 +80,30 @@ class PetResourceIT {
             .andExpect(status().isBadRequest());
     }
 
+    @Test
+    void testCreate_nullName() throws Exception {
+        PetDTO pet = getValidPet();
+        pet.setName(null);
+
+        mockMvc.perform(
+                post("/api/pet")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(getPetJSON(pet)))
+            .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    void testCreate_existingIdRejected() throws Exception {
+        PetDTO pet = getValidPet();
+        pet.setId(42L);
+
+        mockMvc.perform(
+                post("/api/pet")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(getPetJSON(pet)))
+            .andExpect(status().isBadRequest());
+    }
+
     /**
      * Test get pet call with an existing id
      *
@@ -160,6 +184,21 @@ class PetResourceIT {
                 delete("/api/pet/-1")
                     .accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isBadRequest());
+    }
+
+    /**
+     * Test delete call with invalid value
+     *
+     * @throws IOException
+     * @throws Exception
+     * @see PetResource#delete(Long)
+     */
+    @Test
+    void testGet_petStatus() throws Exception {
+        mockMvc.perform(
+                get("/api/pet/status/SOLD")
+                    .accept(MediaType.APPLICATION_JSON))
+            .andExpect(status().isOk());
     }
 
     /**
