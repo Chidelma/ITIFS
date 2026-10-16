@@ -172,3 +172,8 @@ modules.xml
 *.code-workspace
 
 # End of https://www.toptal.com/developers/gitignore/api/intellij+all,intellij+iml,visualstudiocode
+AGENTS.md
+CLAUDE.md
+.github/copilot-instructions.md
+.claude
+.codex

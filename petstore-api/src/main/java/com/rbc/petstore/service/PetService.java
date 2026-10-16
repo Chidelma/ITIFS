@@ -6,6 +6,10 @@ import com.rbc.petstore.repository.PetRepository;
 import org.springframework.stereotype.Service;
 
 import java.security.InvalidParameterException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -40,6 +44,25 @@ public class PetService {
      */
     public Pet getPet(Long id) {
         return petRepository.findById(id).orElse(null);
+    }
+
+    /**
+     * Find pet by Status
+     *
+     * @param status status of the pet to find
+     * @return a {@link Pet} instance if a match is found, null otherwise
+     */
+    public List<Pet> getPetStatus(String status) {
+
+        List<Pet> statusPets = new ArrayList<Pet>();
+       
+        this.getAllPets().forEach(pet -> {
+            if(pet.getStatus().toString().equals(status)) {
+                statusPets.add(pet);
+            }
+        });
+
+        return statusPets;
     }
 
     /**

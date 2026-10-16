@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: petstore-api
+  jpa:
+    hibernate:
+      ddl-auto: none
+    database: HSQL
+
+server:
+  port: 9000
